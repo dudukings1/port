@@ -1,0 +1,163 @@
+/* ============================================================
+   CONTAINER PRINCIPAL
+   ============================================================ */
+.projetos-container {
+  padding: 60px 20px;
+  background-color: #ffffff;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  max-width: 1500px; /* Limita a largura para não esticar demais */
+  margin: 0 auto;    /* Centraliza na tela */
+}
+
+.projetos-titulo {
+  font-size: 2.5rem;
+  color: #000000;
+  margin-bottom: 40px;
+  font-weight: 800;
+  letter-spacing: -1px;
+  text-align: left;
+}
+
+/* ============================================================
+   GRID DE LAYOUT (Configurado para 2x2)
+   ============================================================ */
+.projetos-grid {
+  display: grid;
+  /* Força exatamente 2 colunas de larguras iguais */
+  grid-template-columns: repeat(2, 1fr); 
+  gap: 32px;
+}
+
+/* Responsividade: Em tablets e celulares, vira 1 coluna */
+@media (max-width: 850px) {
+  .projetos-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ============================================================
+   O CARD
+   ============================================================ */
+.projeto-card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+  height: 100%; /* Garante que todos os cards tenham a mesma altura */
+}
+
+.projeto-card:hover {
+  transform: translateY(-8px);
+  border-color: #007bff; /* Borda azul no destaque */
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+}
+
+/* ============================================================
+   IMAGEM (Com efeito de foco)
+   ============================================================ */
+.projeto-imagem {
+  width: 100%;       /* Ocupa toda a largura do card */
+  height: 350px;     /* Altura fixa que você definiu */
+  
+  /* MÁGICA DO ENQUADRAMENTO */
+  object-fit: cover;    /* Faz a imagem preencher o espaço sem distorcer */
+  object-position: center; /* Garante que o centro da foto seja o foco */
+  
+  border-bottom: 1px solid #f0f0f0;
+  filter: blur(1px) grayscale(20%);
+  transition: all 0.5s ease;
+  display: block;    /* Remove espaços vazios estranhos embaixo da imagem */
+}
+
+.projeto-card:hover .projeto-imagem {
+  filter: blur(0px) grayscale(0%);
+  transform: scale(1.03); /* Leve zoom no hover */
+}
+
+/* ============================================================
+   CONTEÚDO E TEXTOS
+   ============================================================ */
+.projeto-info {
+  padding: 28px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.projeto-info h3 {
+  margin: 0 0 12px 0;
+  font-size: 1.5rem;
+  color: #000000;
+  font-weight: 700;
+}
+
+.projeto-info p {
+  font-size: 1rem;
+  color: #4b5563;
+  line-height: 1.7;
+  margin-bottom: 24px;
+}
+
+/* ============================================================
+   TAGS (Tecnologias)
+   ============================================================ */
+.projeto-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+.tag-item {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  background: #f3f4f6;
+  color: #374151;
+  padding: 6px 12px;
+  border-radius: 8px;
+}
+
+/* ============================================================
+   LINKS E BOTÕES
+   ============================================================ */
+.projeto-links {
+  margin-top: auto; /* Empurra os links para o final do card */
+  padding-top: 20px;
+  border-top: 1px solid #f3f4f6;
+  display: flex;
+  gap: 25px;
+  align-items: center;
+}
+
+.link-github {
+  color: #6b7280;
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 600;
+  transition: color 0.2s;
+}
+
+.link-github:hover {
+  color: #000000;
+}
+
+.link-deploy {
+  color: #007bff; /* Azul vibrante para ação principal */
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 700;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+}
+
+.link-deploy:hover {
+  text-decoration: underline;
+  opacity: 0.8;
+  transform: translateX(3px); /* Pequeno movimento para a direita */
+}

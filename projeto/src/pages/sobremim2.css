@@ -1,0 +1,192 @@
+.sobremim-container {
+  padding: 100px 20px; /* Aumentei o respiro superior/inferior */
+  max-width: 1200px; /* Aumentei a largura máxima para acomodar a foto */
+  margin: 0 auto;
+  font-family: 'Inter', system-ui, sans-serif;
+  background-color: #fff;
+}
+
+/* Container flex para colocar texto e foto lado a lado */
+.sobremim-conteudo {
+  display: flex;
+  gap: 60px; /* Espaço entre texto e foto */
+  align-items: flex-start; /* Alinha pelo topo */
+  margin-bottom: 60px;
+}
+
+/* Largura da coluna de texto */
+.sobremim-texto {
+  flex: 2; /* Ocupa 2 partes do espaço */
+}
+
+.sobremim-titulo {
+  font-size: 14px;
+  font-weight: 700;
+  color: #adadad; /* Azul de destaque */
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+.sobremim-descricao {
+  font-size: 2.5rem; /* Aumentei um pouco para dar mais impacto */
+  font-weight: 800;
+  color: #000;
+  line-height: 1.1;
+  margin-bottom: 50px;
+}
+
+/* Container das listas para ficarem lado a lado */
+.sobremim-listas-wrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+}
+
+.sobremim-secao-lista h1 {
+  font-size: 1.2rem;
+  color: #000;
+  margin-bottom: 15px;
+  border-left: 3px solid #007bff; /* Detalhe em azul mais fino */
+  padding-left: 12px;
+}
+
+.sobremim-secao-lista ol {
+  list-style: none;
+  padding: 0;
+}
+
+.sobremim-secao-lista li {
+  font-size: 1rem;
+  color: #4b5563;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-left: 10px;
+}
+
+/* Marcador personalizado para a lista */
+.sobremim-secao-lista li::before {
+  
+  color: #007bff;
+  font-weight: bold;
+}
+
+/* --- ESTILO DA FOTO --- */
+.sobremim-foto-container {
+  flex: 1; /* Ocupa 1 parte do espaço */
+  display: flex;
+  justify-content: center;
+  position: sticky; /* Faz a foto "grudar" ao rolar a página */
+  top: 150px; /* Distância do topo para o sticky */
+}
+
+.sobremim-foto {
+  width: 100%;
+  max-width: 350px; /* Largura máxima da foto */
+  height: auto;
+  border-radius: 20px; /* Bordas arredondadas modernas */
+  object-fit: cover; /* Garante que a foto preencha o espaço sem distorcer */
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  border: 5px solid #fff; /* Borda branca grossa para dar destaque */
+  outline: 1px solid #e5e7eb; /* Linha externa fina cinza */
+}
+
+/* Estilo para o placeholder (remova quando colocar a foto) */
+.sobremim-foto-placeholder {
+  width: 100%;
+  max-width: 350px;
+  height: 450px;
+  
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #9ca3af;
+  font-weight: 600;
+  
+}
+.sobremim-foto-placeholder img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 20px;
+}
+
+/* --- CHAMADA FINAL --- */
+.sobremim-chamada {
+  padding: 30px;
+  background-color: #f9fafb;
+  border-radius: 16px;
+  border: 1px solid #e5e7eb;
+  transition: all 0.3s ease;
+}
+
+.sobremim-chamada:hover {
+  background-color: #f0fdf4; /* Fundo verde bem clarinho no hover (sucesso/oportunidade) */
+  border-color: #bbf7d0;
+  transform: translateY(-3px);
+}
+
+.sobremim-chamada h2 {
+  font-size: 1.25rem;
+  color: #111;
+  font-weight: 600;
+  text-align: center;
+}
+
+/* --- RESPONSIVIDADE --- */
+@media (max-width: 992px) {
+  .sobremim-conteudo {
+    flex-direction: column; /* No tablet, foto vai para baixo do texto */
+    gap: 40px;
+  }
+  
+  .sobremim-foto-container {
+    position: static; /* Remove o sticky no mobile */
+    order: -1; /* Coloca a foto ANTES do texto no mobile (opcional) */
+  }
+  
+  .sobremim-descricao {
+    font-size: 2rem;
+  }
+}
+/* Estilo para a parte do GTA/História */
+.sobremim-historia {
+  background-color: #f8f9fa;
+  padding: 20px;
+  border-radius: 12px;
+  border-left: 4px solid #000;
+  margin-bottom: 40px;
+}
+
+.sobremim-historia h3 {
+  font-size: 1.1rem;
+  margin-bottom: 10px;
+  color: #007bff;
+}
+
+.sobremim-historia p {
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: #4b5563;
+}
+
+/* Estilo para as características */
+.char-item::before {
+   /* Um símbolo diferente para diferenciar de gostos */
+  color: #000 !important;
+}
+
+/* Ajuste na descrição para não ficar gigante */
+.sobremim-descricao {
+  font-size: 2.3rem;
+  margin-bottom: 30px;
+}
+
+/* Destaque para o texto de GTA */
+strong {
+  color: #000;
+  font-weight: 700;
+}

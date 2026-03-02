@@ -1,0 +1,13 @@
+.partebranca {
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.linhazul {
+    width: 90%;
+    height: 1px;
+    background-color: #080808ab;
+    margin: 20px 0;
+}
