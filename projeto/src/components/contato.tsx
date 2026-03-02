@@ -17,7 +17,7 @@ export function Contato() {
     <button className="send-btn2">Enviar</button>
   </div>
   </div>
-                <div style={{
+                <div className="o1" style={{
                     display: "flex",
                     gap: "10px"
                 }}>{/* GITHUB */}

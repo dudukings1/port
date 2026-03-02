@@ -181,11 +181,14 @@
     flex-direction: column;
     align-items: center;
   }
-
+  .o1 {
+    flex-direction: column;
+  }
   .caixas-contatos {
     width: 100%;
     max-width: 300px;
     justify-content: center;
+    
   }
 
   .contact-box2 {
