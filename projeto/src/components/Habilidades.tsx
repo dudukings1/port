@@ -71,7 +71,7 @@ export default function Habilidades() {
           enableArcLinkLabels={false}
           arcLabelsSkipAngle={10}
           arcLabelsTextColor="#ffffff"
-          tooltip={({ datum }) => (
+          tooltip={({ datum }: any) => (
             <div
               style={{
                 background: "#0f172a",
