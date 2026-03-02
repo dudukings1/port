@@ -54,7 +54,7 @@ export default function Habilidades() {
         <h1 className="titulo">HABILIDADES</h1>
       </div>
 
-      <div style={{ height: "500px" }}>
+      <div className="pie-container" style={{ height: "500px" }}>
         <ResponsivePie
           data={data}
           margin={{ top: 40, right: 80, bottom: 40, left: 80 }}

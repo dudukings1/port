@@ -1,17 +1,35 @@
+/* ============================================================
+   NAVBAR
+   ============================================================ */
 
 nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 70px;
+
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 40px;
+
+  padding: 0 40px;
   background-color: #10121fb7;
-  border-bottom: 1px solid #e5e5e5;
-  font-family: "Segoe UI", sans-serif;
-  z-index: 99999999;
-  position: fixed;
-  width: 100%;
   backdrop-filter: blur(8px);
+  border-bottom: 1px solid #1f2937;
+
+  font-family: "Segoe UI", sans-serif;
+  z-index: 9999;
 }
+
+/* Espaço para compensar navbar fixa */
+body {
+  padding-top: 70px;
+}
+
+/* ============================================================
+   SECTIONS INTERNAS
+   ============================================================ */
 
 nav section {
   display: flex;
@@ -19,12 +37,9 @@ nav section {
   gap: 20px;
 }
 
-nav img {
-  width: 42px;
-  border-radius: 50%;
-  cursor: pointer;
-  border: 2px solid #131313;
-}
+/* ============================================================
+   LINKS
+   ============================================================ */
 
 nav a {
   text-decoration: none;
@@ -35,77 +50,140 @@ nav a {
 }
 
 nav a:hover {
-  color: #2563eb; /* azul suave */
+  color: #2563eb;
 }
 
-nav button {
-  padding: 8px 18px;
-  background-color: #fcfcfc;
-  color: #141414;
-  border: none;
-  border-radius: 6px;
+/* ============================================================
+   PROFILE IMAGE
+   ============================================================ */
+
+.profile-img {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  object-fit: cover;
   cursor: pointer;
-  transition: 0.2s ease;
+
+  border: 2px solid #111;
+  padding: 2px;
+  transition: all 0.3s ease;
 }
 
-nav button:hover {
-  background-color: #2563eb;
+.profile-img:hover {
+  transform: scale(1.08);
+  border-color: #2563eb;
+  box-shadow: 0 6px 18px rgba(37, 99, 235, 0.25);
 }
+
+/* ============================================================
+   NOME CENTRAL
+   ============================================================ */
+
+.meu-nome {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: #f0f0f0;
+  pointer-events: none;
+}
+
+/* ============================================================
+   BOTÃO CONTATO
+   ============================================================ */
+
+.contact-btn {
+  padding: 8px 18px;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  border-radius: 8px;
+  border: 1px solid #ffffff;
+  background-color: transparent;
+  color: #ebebeb;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.contact-btn:hover {
+  background-color: #ffffff;
+  color: #000000;
+  transform: translateY(-2px);
+}
+
+.contact-btn.active {
+  background-color: #2563eb;
+  border-color: #2563eb;
+  color: #ffffff;
+}
+
+/* ============================================================
+   DROPDOWN
+   ============================================================ */
 
 .menu-dropdown {
   position: absolute;
-  margin-top: 12px;
+  top: 70px;
+  right: 40px;
+
   background: #ffffff;
   border: 1px solid #e5e5e5;
   border-radius: 8px;
   padding: 12px 20px;
+
   display: flex;
   flex-direction: column;
   gap: 10px;
+
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
 }
 
 .menu-dropdown a {
-  margin: 0;
-  cursor: pointer;
   font-size: 14px;
   color: #333;
-  padding: 3px 8px;
+  padding: 6px 10px;
+  border-radius: 6px;
   transition: 0.2s ease;
 }
 
-.menu-dropdown p:hover {
+.menu-dropdown a:hover {
+  background-color: #f3f4f6;
   color: #2563eb;
-  background-color: #e5e5e5;
-  
-  border-radius: 10px;
 }
+
+/* ============================================================
+   FORM CONTATO
+   ============================================================ */
+
 .contact-box {
   position: absolute;
-  right: 60px;
+  right: 40px;
   top: 80px;
   width: 280px;
+
   background: #ffffff;
   border: 1px solid #e5e5e5;
   border-radius: 10px;
   padding: 20px;
+
   display: flex;
   flex-direction: column;
   gap: 12px;
+
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
   animation: fadeIn 0.2s ease-in-out;
-  z-index: 9999999999;
 }
 
 .contact-box input,
 .contact-box textarea {
-  width: 90%;
+  width: 100%;
   padding: 10px 12px;
   border: 1px solid #dcdcdc;
   border-radius: 6px;
   font-size: 14px;
   outline: none;
-  transition: 0.2s ease;
 }
 
 .contact-box input:focus,
@@ -132,80 +210,67 @@ nav button:hover {
   background: #2563eb;
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-8px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-.contact-btn {
-  padding: 10px 22px;
-  font-size: 14px;
-  font-weight: 500;
-  letter-spacing: 1px;
-  border-radius: 8px;
-  border: 1px solid #ffffff;
-  background-color: transparent;
-  color: #ebebeb;
-  cursor: pointer;
-  transition: all 0.25s ease;
-}
-
-/* Hover elegante */
-.contact-btn:hover {
-  background-color: #ffffff;
-  color: #000000;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
-}
-
-/* Quando o formulário estiver aberto */
-.contact-btn.active {
-  background-color: #2563eb;
-  border-color: #2563eb;
-  color: #ffffff;
-  
-}
-.profile-img {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  object-fit: cover;
-  cursor: pointer;
-
-  border: 2px solid #111;
-  padding: 2px;
-
-  transition: all 0.3s ease;
-}
-
-/* Hover elegante */
-.profile-img:hover {
-  transform: scale(1.08);
-  border-color: #2563eb;
-  box-shadow: 0 6px 18px rgba(37, 99, 235, 0.25);
-}
-.meu-nome {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 22px;
-  font-weight: 600;
-  letter-spacing: 1px;
-  color: #f0f0f0;
-  
-}
 .contact-title {
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 600;
   letter-spacing: 1px;
   color: #111;
-  margin: 0 0 10px 0;
-  padding-bottom: 8px;
-  border-bottom: 2px solid #000000;
+  border-bottom: 2px solid #000;
+  padding-bottom: 6px;
 }
 
+/* ============================================================
+   RESPONSIVIDADE
+   ============================================================ */
+
+@media (max-width: 768px) {
+
+  nav {
+    padding: 0 20px;
+  }
+
+  .meu-nome {
+    display: none; /* some no mobile para não quebrar */
+  }
+
+  nav section {
+    gap: 12px;
+  }
+
+  .contact-box {
+    right: 20px;
+    width: 90%;
+    max-width: 320px;
+  }
+
+  .menu-dropdown {
+    right: 20px;
+  }
+}
+@media (max-width: 438px) {
+
+  nav {
+    padding: 0 20px;
+  }
+
+  .meu-nome {
+    display: none; /* some no mobile para não quebrar */
+  }
+
+  nav section {
+    gap: 8px;
+  }
+
+  .contact-box {
+    right: 130px;
+    width: 90%;
+    max-width: 300px;
+  }
+  .contact-btn {
+    margin-right: 130px;
+    font-size: 12px;
+  }
+  .menu-dropdown {
+    right: 0px;
+  }
+}

@@ -1,18 +1,34 @@
+/* ============================================================
+   SECTION INÍCIO
+   ============================================================ */
+
+.inicio-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 100vh;
+  padding: 0 60px;
+  gap: 40px;
+}
+
+/* ============================================================
+   HERO TEXTO
+   ============================================================ */
+
 .hero {
-  padding: 120px 60px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  
+  flex: 1;
 }
 
 .hero-title {
-  font-size: 74px;
+  font-size: clamp(36px, 6vw, 74px);
   font-weight: 600;
   color: #111;
   max-width: 750px;
-  line-height: 1.2;
-  margin-bottom: 18px;
+  line-height: 1.15;
+  margin-bottom: 20px;
   font-family: 'Inter', sans-serif;
 }
 
@@ -25,9 +41,22 @@
   letter-spacing: 1px;
   color: #555;
   border-left: 3px solid #2563eb;
-  padding-left: 10px;
+  padding-left: 12px;
+  font-family: 'Inter', sans-serif;
+  margin-bottom: 20px;
+}
+
+.hero p {
+  font-size: 14px;
+  letter-spacing: 1px;
+  color: #555;
+  padding-left: 30px;
+  margin-bottom: 20px;
   font-family: 'Inter', sans-serif;
 }
+
+/* Palavra animada */
+
 .animated-word {
   color: #2563eb;
   display: inline-block;
@@ -44,41 +73,76 @@
     transform: translateX(0);
   }
 }
-.scroll-gif {
-  width: 700px;
-  margin-top: 20px;
-  margin-right: 50px;
-  animation: bounce 3s infinite;
 
+/* ============================================================
+   GIF / IMAGEM
+   ============================================================ */
+
+.scroll-gif {
+  width: clamp(250px, 35vw, 700px);
+  animation: bounce 3s infinite;
+  flex: 1;
+  max-width: 100%;
 }
 
 @keyframes bounce {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(10px);
-  }
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(10px); }
 }
-.inicio-section {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  height: 100vh;
 
-}
+/* ============================================================
+   LINHA DIVISÓRIA
+   ============================================================ */
+
 .linha {
   width: 100%;
   height: 1px;
   background-color: #8b8b8b;
   margin: 20px 0;
-
 }
-.hero p {
-  font-size: 14px;
-  letter-spacing: 1px;
-  color: #555;
-  padding-left: 30px;
-  margin-bottom: 20px;
-  font-family: 'Inter', sans-serif;
+
+/* ============================================================
+   RESPONSIVIDADE
+   ============================================================ */
+
+/* Tablet */
+@media (max-width: 1024px) {
+  .inicio-section {
+    padding: 0 40px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+
+  .inicio-section {
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    padding: 60px 20px;
+    gap: 30px;
+  }
+
+  .hero {
+    align-items: center;
+  }
+
+  .hero-title {
+    max-width: 100%;
+  }
+
+  .hero-subtitle {
+    border-left: none;
+    border-bottom: 2px solid #2563eb;
+    padding-left: 0;
+    padding-bottom: 8px;
+  }
+
+  .hero p {
+    padding-left: 0;
+  }
+
+  .scroll-gif {
+    width: 80%;
+  }
 }
