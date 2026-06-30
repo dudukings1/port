@@ -1,276 +1,101 @@
-/* ============================================================
-   NAVBAR
-   ============================================================ */
-
-nav {
-  position: fixed;
+.header {
+  position: sticky;
   top: 0;
-  left: 0;
-  width: 100%;
-  height: 70px;
+  z-index: 50;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--color-border);
+}
 
+.header-inner {
   display: flex;
+  align-items: center;
   justify-content: space-between;
-  align-items: center;
-
-  padding: 0 40px;
-  background-color: #10121fb7;
-  backdrop-filter: blur(8px);
-  border-bottom: 1px solid #1f2937;
-
-  font-family: "Segoe UI", sans-serif;
-  z-index: 9999;
+  height: 72px;
 }
 
-/* Espaço para compensar navbar fixa */
-body {
-  padding-top: 70px;
-}
-
-/* ============================================================
-   SECTIONS INTERNAS
-   ============================================================ */
-
-nav section {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
-
-/* ============================================================
-   LINKS
-   ============================================================ */
-
-nav a {
+.brand {
+  font-size: 19px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
   text-decoration: none;
-  color: #ffffff;
-  font-weight: 500;
-  letter-spacing: 1px;
-  transition: 0.2s ease;
+  color: var(--color-ink);
 }
 
-nav a:hover {
-  color: #2563eb;
+.brand span {
+  color: var(--color-accent);
 }
 
-/* ============================================================
-   PROFILE IMAGE
-   ============================================================ */
-
-.profile-img {
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-  object-fit: cover;
-  cursor: pointer;
-
-  border: 2px solid #111;
-  padding: 2px;
-  transition: all 0.3s ease;
-}
-
-.profile-img:hover {
-  transform: scale(1.08);
-  border-color: #2563eb;
-  box-shadow: 0 6px 18px rgba(37, 99, 235, 0.25);
-}
-
-/* ============================================================
-   NOME CENTRAL
-   ============================================================ */
-
-.meu-nome {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 20px;
-  font-weight: 600;
-  letter-spacing: 1px;
-  color: #f0f0f0;
-  pointer-events: none;
-}
-
-/* ============================================================
-   BOTÃO CONTATO
-   ============================================================ */
-
-.contact-btn {
-  padding: 8px 18px;
-  font-size: 13px;
-  font-weight: 500;
-  letter-spacing: 1px;
-  border-radius: 8px;
-  border: 1px solid #ffffff;
-  background-color: transparent;
-  color: #ebebeb;
-  cursor: pointer;
-  transition: all 0.25s ease;
-}
-
-.contact-btn:hover {
-  background-color: #ffffff;
-  color: #000000;
-  transform: translateY(-2px);
-}
-
-.contact-btn.active {
-  background-color: #2563eb;
-  border-color: #2563eb;
-  color: #ffffff;
-}
-
-/* ============================================================
-   DROPDOWN
-   ============================================================ */
-
-.menu-dropdown {
-  position: absolute;
-  top: 70px;
-
-
-  background: #ffffff;
-  border: 1px solid #e5e5e5;
-  border-radius: 8px;
-  padding: 12px 20px;
-
+.nav-desktop {
   display: flex;
-  flex-direction: column;
-  gap: 10px;
-
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  align-items: center;
+  gap: 32px;
 }
 
-.menu-dropdown a {
+.nav-desktop a {
   font-size: 14px;
-  color: #333;
-  padding: 6px 10px;
-  border-radius: 6px;
-  transition: 0.2s ease;
+  font-weight: 500;
+  text-decoration: none;
+  color: var(--color-text-muted);
+  transition: color 0.2s ease;
 }
 
-.menu-dropdown a:hover {
-  background-color: #f3f4f6;
-  color: #2563eb;
+.nav-desktop a:hover {
+  color: var(--color-ink);
 }
 
-/* ============================================================
-   FORM CONTATO
-   ============================================================ */
+.nav-cta {
+  padding: 9px 18px;
+  border-radius: var(--radius-full);
+  background: var(--color-ink) !important;
+  color: #fff !important;
+}
 
-.contact-box {
-  position: absolute;
-  right: 40px;
-  top: 80px;
-  width: 280px;
+.nav-cta:hover {
+  background: var(--color-accent) !important;
+}
 
-  background: #ffffff;
-  border: 1px solid #e5e5e5;
-  border-radius: 10px;
-  padding: 20px;
-
-  display: flex;
+.nav-toggle {
+  display: none;
   flex-direction: column;
-  gap: 12px;
-
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
-  animation: fadeIn 0.2s ease-in-out;
-}
-
-.contact-box input,
-.contact-box textarea {
-  width: 100%;
-  padding: 10px 12px;
-  border: 1px solid #dcdcdc;
-  border-radius: 6px;
-  font-size: 14px;
-  outline: none;
-}
-
-.contact-box input:focus,
-.contact-box textarea:focus {
-  border-color: #2563eb;
-}
-
-.contact-box textarea {
-  resize: none;
-  height: 80px;
-}
-
-.send-btn {
-  padding: 10px;
-  background: #111;
-  color: white;
+  gap: 5px;
+  background: none;
   border: none;
-  border-radius: 6px;
   cursor: pointer;
-  transition: 0.2s ease;
+  padding: 8px;
 }
 
-.send-btn:hover {
-  background: #2563eb;
+.nav-toggle span {
+  width: 22px;
+  height: 2px;
+  background: var(--color-ink);
+  transition: transform 0.2s ease, opacity 0.2s ease;
 }
 
-.contact-title {
-  font-size: 15px;
-  font-weight: 600;
-  letter-spacing: 1px;
-  color: #111;
-  border-bottom: 2px solid #000;
-  padding-bottom: 6px;
+.nav-mobile {
+  display: flex;
+  flex-direction: column;
+  padding: 8px 24px 20px;
+  border-bottom: 1px solid var(--color-border);
 }
 
-/* ============================================================
-   RESPONSIVIDADE
-   ============================================================ */
+.nav-mobile a {
+  padding: 12px 0;
+  text-decoration: none;
+  color: var(--color-text);
+  font-weight: 500;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.nav-mobile a:last-child {
+  border-bottom: none;
+}
 
 @media (max-width: 768px) {
-
-  nav {
-    padding: 0 20px;
+  .nav-desktop {
+    display: none;
   }
-
-  .meu-nome {
-    display: none; /* some no mobile para não quebrar */
-  }
-
-  nav section {
-    gap: 12px;
-  }
-
-  .contact-box {
-    right: 20px;
-    width: 90%;
-    max-width: 320px;
-  }
-
-  .menu-dropdown {
-    right: 20px;
-  }
-}
-@media (max-width: 438px) {
-
-  nav {
-    padding: 0 20px;
-  }
-
-  .meu-nome {
-    display: none; /* some no mobile para não quebrar */
-  }
-
-  nav section {
-    gap: 8px;
-  }
-
-  .contact-box {
-    right: 130px;
-    width: 90%;
-    max-width: 300px;
-  }
-  .contact-btn {
-    margin-right: 130px;
-    font-size: 12px;
-  }
-  .menu-dropdown {
-    right: 0px;
+  .nav-toggle {
+    display: flex;
   }
 }

@@ -1,20 +1,24 @@
-import { Sobremim2 } from './pages/Sobremim2'
-import './app.css'
-import { Routes } from 'react-router-dom'
-import { Principal } from './pages/Principal'
-import { BrowserRouter, Route } from 'react-router-dom'
+import "./app.css";
+import { Header } from "./components/Header";
+import { Hero } from "./components/Hero";
+import { Sobre } from "./components/Sobre";
+import { Habilidades } from "./components/Habilidades";
+import { Projetos } from "./components/projects/Projetos";
+import { Contato } from "./components/contato";
+import { Footer } from "./components/Footer";
+
 function App() {
-  
   return (
     <>
-       <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Principal />} />
-        <Route path="/sobremim" element={<Sobremim2 />} />
-      </Routes>
-    </BrowserRouter>
+      <Header />
+      <Hero />
+      <Sobre />
+      <Projetos />
+      <Habilidades />
+      <Contato />
+      <Footer />
     </>
-  )
+  );
 }
 
-export default App
+export default App;

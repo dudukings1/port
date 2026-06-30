@@ -1,0 +1,53 @@
+.sobre-grid {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 64px;
+  align-items: start;
+}
+
+.sobre-foto {
+  display: flex;
+  justify-content: center;
+  position: sticky;
+  top: 110px;
+}
+
+.sobre-texto {
+  font-size: 16px;
+  line-height: 1.75;
+  color: var(--color-text-muted);
+  margin-bottom: 18px;
+}
+
+.sobre-fatos {
+  display: flex;
+  gap: 36px;
+  margin-top: 32px;
+  flex-wrap: wrap;
+}
+
+.fato-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.fato-numero {
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--color-ink);
+  letter-spacing: -0.02em;
+}
+
+.fato-label {
+  font-size: 13px;
+  color: var(--color-text-muted);
+}
+
+@media (max-width: 768px) {
+  .sobre-grid {
+    grid-template-columns: 1fr;
+  }
+  .sobre-foto {
+    position: static;
+  }
+}
