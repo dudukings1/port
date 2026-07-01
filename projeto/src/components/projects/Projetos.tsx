@@ -1,6 +1,11 @@
-import { motion } from "framer-motion";
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import mae from "../../img/mae.jpeg";
+import { useReveal, useStaggerReveal } from "../../lib/useReveal";
 import "./Projetos.css";
+
+gsap.registerPlugin(ScrollTrigger);
 
 interface Projeto {
   id: number;
@@ -8,6 +13,9 @@ interface Projeto {
   descricao: string;
   tags: string[];
   imagem?: string;
+  // Nenhum projeto tem vídeo ainda — quando gravar uma demo, preencher aqui
+  // que o card troca a imagem por <video loop muted> automaticamente.
+  video?: string;
   destaque?: string;
   linkGithub?: string;
   linkDeploy?: string;
@@ -53,42 +61,68 @@ const PROJETOS: Projeto[] = [
 ];
 
 export function Projetos() {
-  return (
-    <section className="section section--soft" id="projetos">
-      <div className="container">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.5 }}
-        >
-          <p className="eyebrow">Projetos</p>
-          <h2 className="section-title">O que eu já levei até produção</h2>
-          <p className="section-subtitle">
-            Sistemas reais, usados por pessoas reais — não só exercícios de curso.
-          </p>
-        </motion.div>
+  const introRef = useReveal<HTMLDivElement>();
+  const gridRef = useStaggerReveal<HTMLDivElement>(".projeto-card", { stagger: 0.14 });
+  const parallaxRoot = useRef<HTMLDivElement | null>(null);
 
-        <div className="projetos-grid">
+  useEffect(() => {
+    const root = parallaxRoot.current;
+    if (!root) return;
+
+    const ctx = gsap.context(() => {
+      root.querySelectorAll<HTMLElement>(".projeto-visual-inner").forEach((el) => {
+        gsap.to(el, {
+          yPercent: 10,
+          ease: "none",
+          scrollTrigger: {
+            trigger: el,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: true,
+          },
+        });
+      });
+    }, root);
+
+    return () => ctx.revert();
+  }, []);
+
+  return (
+    <section className="section projetos-secao curtain curtain--fechada" id="projetos">
+      <div className="container">
+        <div ref={introRef}>
+          <p className="eyebrow eyebrow--claro">Projetos</p>
+          <h2 className="section-title section-title--claro">O que eu já levei até produção</h2>
+        </div>
+
+        <div
+          className="projetos-lista"
+          ref={(node) => {
+            gridRef.current = node;
+            parallaxRoot.current = node;
+          }}
+        >
           {PROJETOS.map((projeto, index) => (
-            <motion.article
+            <article
               key={projeto.id}
-              className="projeto-card"
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.4, delay: (index % 2) * 0.1 }}
+              className={`projeto-card ${index % 2 === 1 ? "projeto-card--invertido" : ""}`}
             >
               <div className="projeto-visual">
-                {projeto.imagem ? (
-                  <img src={projeto.imagem} alt={projeto.titulo} className="projeto-imagem" />
-                ) : (
-                  <div className="projeto-placeholder">{projeto.titulo.charAt(0)}</div>
-                )}
+                <div className="projeto-visual-inner">
+                  {projeto.video ? (
+                    <video src={projeto.video} autoPlay loop muted playsInline className="projeto-imagem" />
+                  ) : projeto.imagem ? (
+                    <img src={projeto.imagem} alt={projeto.titulo} className="projeto-imagem" />
+                  ) : (
+                    <div className="projeto-placeholder" />
+                  )}
+                </div>
                 {projeto.destaque && <span className="projeto-selo">{projeto.destaque}</span>}
+                <span className="projeto-explorar">Ver projeto</span>
               </div>
 
               <div className="projeto-info">
+                <span className="projeto-numero">{String(index + 1).padStart(2, "0")}</span>
                 <h3>{projeto.titulo}</h3>
                 <p>{projeto.descricao}</p>
 
@@ -113,7 +147,7 @@ export function Projetos() {
                   )}
                 </div>
               </div>
-            </motion.article>
+            </article>
           ))}
         </div>
       </div>

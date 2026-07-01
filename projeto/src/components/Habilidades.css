@@ -1,3 +1,10 @@
+.habilidades-intro {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .habilidades-grupos {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -6,8 +13,8 @@
 }
 
 .habilidade-grupo {
-  background: var(--color-bg-soft);
-  border: 1px solid var(--color-border);
+  background: #161616;
+  border: 1px solid #262626;
   border-radius: var(--radius-lg);
   padding: 28px;
 }
@@ -17,13 +24,15 @@
   font-weight: 700;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: var(--color-accent);
+  color: #ffffff;
   margin-bottom: 18px;
+  text-align: center;
 }
 
 .grupo-badges {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 10px;
 }
 
@@ -32,12 +41,12 @@
   align-items: center;
   gap: 8px;
   padding: 9px 14px;
-  background: #ffffff;
-  border: 1px solid var(--color-border);
+  background: #1f1f1f;
+  border: 1px solid #2e2e2e;
   border-radius: var(--radius-full);
   font-size: 14px;
   font-weight: 500;
-  color: var(--color-text);
+  color: #e5e5e5;
   transition: transform 0.2s ease, border-color 0.2s ease;
 }
 
@@ -49,7 +58,7 @@
 .skill-icone {
   display: inline-flex;
   font-size: 16px;
-  color: var(--color-accent);
+  color: #a3a3a3;
 }
 
 @media (max-width: 900px) {

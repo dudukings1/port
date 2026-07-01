@@ -1,0 +1,62 @@
+.mock-terminal {
+  max-width: 520px;
+  margin: 96px auto 0;
+  border-radius: var(--radius-md);
+  background: #161616;
+  border: 1px solid #2a2a2a;
+  overflow: hidden;
+}
+
+.mock-terminal-barra {
+  display: flex;
+  gap: 7px;
+  padding: 12px 16px;
+  border-bottom: 1px solid #2a2a2a;
+}
+
+.mock-terminal-ponto {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #3a3a3a;
+}
+
+.mock-terminal-corpo {
+  padding: 20px 22px 28px;
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+  font-size: 14px;
+  line-height: 1.9;
+  color: #d4d4d4;
+  min-height: 130px;
+}
+
+.mock-terminal-corpo p {
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.mock-terminal-sucesso {
+  color: #4ade80;
+}
+
+.mock-terminal-cursor {
+  display: inline-block;
+  width: 7px;
+  height: 15px;
+  margin-left: 2px;
+  background: #d4d4d4;
+  vertical-align: text-bottom;
+  animation: mock-terminal-piscar 1s step-start infinite;
+}
+
+@keyframes mock-terminal-piscar {
+  50% {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mock-terminal-cursor {
+    animation: none;
+  }
+}

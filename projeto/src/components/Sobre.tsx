@@ -1,57 +1,31 @@
-import { motion } from "framer-motion";
-import { Avatar } from "./Avatar";
+import { useReveal } from "../lib/useReveal";
 import "./Sobre.css";
 
-const FATOS = [
-  { numero: "3", label: "projetos em produção" },
-  { numero: "2", label: "stacks full-stack dominadas" },
-  { numero: "1", label: "automação com IA rodando 24/7" },
-];
-
 export function Sobre() {
+  const textoRef = useReveal<HTMLDivElement>();
+
   return (
-    <section className="section section--soft" id="sobre">
-      <div className="container sobre-grid">
-        <motion.div
-          className="sobre-foto"
-          initial={{ opacity: 0, scale: 0.9 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true, amount: 0.4 }}
-          transition={{ duration: 0.5 }}
-        >
-          <Avatar size={220} />
-        </motion.div>
+    <section className="section curtain" id="sobre">
+      <span className="sobre-aspas" aria-hidden="true">
+        &rdquo;
+      </span>
+      <span className="sobre-anel" aria-hidden="true" />
 
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.5 }}
-        >
-          <p className="eyebrow">Sobre mim</p>
-          <h2 className="section-title">Programar deixou de ser hobby — virou ofício.</h2>
-          <p className="sobre-texto">
-            Comecei mexendo em código por curiosidade e, em pouco tempo, passei a entregar sistemas
-            que rodam de verdade: um app de gestão para uma empresa do agronegócio (com mapa
-            satélite, sincronização em nuvem e versão desktop), um app de finanças pessoais
-            full-stack e uma automação com IA que atende clientes via WhatsApp 24 horas por dia.
-          </p>
-          <p className="sobre-texto">
-            Gosto de pegar um problema real, entender o contexto de quem vai usar e levar a solução
-            até produção — não fico só no protótipo. Sem stack fixa: hoje trabalho com React,
-            TypeScript, Spring Boot, Supabase e automação com n8n + IA, e estou aprofundando também
-            em segurança ofensiva.
-          </p>
-
-          <div className="sobre-fatos">
-            {FATOS.map((fato) => (
-              <div key={fato.label} className="fato-item">
-                <span className="fato-numero">{fato.numero}</span>
-                <span className="fato-label">{fato.label}</span>
-              </div>
-            ))}
-          </div>
-        </motion.div>
+      <div className="container sobre-conteudo" ref={textoRef}>
+        <p className="sobre-frase">
+          Programar deixou de ser hobby — virou <span className="sobre-destaque">ofício.</span>
+        </p>
+        <p className="sobre-texto">
+          Comecei mexendo em código por curiosidade e, em pouco tempo, passei a entregar sistemas
+          que rodam de verdade: um app de gestão para uma empresa do agronegócio, um app de
+          finanças pessoais full-stack e uma automação com IA que atende clientes via WhatsApp 24
+          horas por dia. Gosto de pegar um problema real e levar a solução até produção — não fico
+          só no protótipo.
+        </p>
+        <p className="sobre-fatos">
+          3 projetos em produção &nbsp;·&nbsp; 2 stacks full-stack dominadas &nbsp;·&nbsp; 1
+          automação com IA rodando 24/7
+        </p>
       </div>
     </section>
   );

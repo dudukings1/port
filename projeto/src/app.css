@@ -23,8 +23,21 @@
 }
 
 html {
-  scroll-behavior: smooth;
   scrollbar-width: thin;
+  overflow-x: hidden;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+html.lenis.lenis-smooth {
+  scroll-behavior: auto;
 }
 
 body {
@@ -47,10 +60,26 @@ a {
 
 .section {
   padding: 120px 0;
+  background: var(--color-bg);
 }
 
 .section--soft {
   background: var(--color-bg-soft);
+}
+
+.curtain {
+  position: sticky;
+  top: 0;
+  min-height: 100vh;
+  border-radius: 64px 64px 0 0;
+}
+
+.curtain--fechada {
+  border-radius: 64px;
+}
+
+.section--escura {
+  background: #000000;
 }
 
 .eyebrow {
@@ -61,7 +90,7 @@ a {
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--color-accent);
+  color: var(--color-text-muted);
   margin-bottom: 16px;
 }
 
@@ -69,7 +98,7 @@ a {
   content: "";
   width: 24px;
   height: 2px;
-  background: var(--color-accent);
+  background: var(--color-text-muted);
   display: inline-block;
 }
 
@@ -86,6 +115,20 @@ a {
   color: var(--color-text-muted);
   max-width: 560px;
   line-height: 1.6;
+}
+
+/* Variantes claras (sobre fundo escuro) — ficam depois das regras base de propósito,
+   pra vencer no empate de especificidade quando as duas classes estão no mesmo elemento. */
+.eyebrow--claro {
+  color: #a3a3a3;
+}
+
+.section-title--claro {
+  color: #ffffff;
+}
+
+.section-subtitle--claro {
+  color: #999999;
 }
 
 .btn {

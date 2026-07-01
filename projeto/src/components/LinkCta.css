@@ -1,0 +1,33 @@
+.link-cta {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  height: 1.3em;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--color-ink);
+  text-decoration: none;
+  padding-bottom: 4px;
+  border-bottom: 1px solid var(--color-ink);
+}
+
+.link-cta:hover {
+  color: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+.link-cta-track {
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.4s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.link-cta:hover .link-cta-track {
+  transform: translateY(-1.3em);
+}
+
+.link-cta-label {
+  height: 1.3em;
+  line-height: 1.3em;
+  display: block;
+}

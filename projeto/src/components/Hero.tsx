@@ -1,78 +1,60 @@
-import { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { LinkCta } from "./LinkCta";
+import { HeroVideo } from "./HeroVideo";
 import "./Hero.css";
 
-const PALAVRAS = ["produção", "performance", "soluções reais", "código limpo"];
-
 export function Hero() {
-  const [indice, setIndice] = useState(0);
+  const rootRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setIndice((prev) => (prev + 1) % PALAVRAS.length);
-    }, 2400);
-    return () => clearInterval(interval);
+    const root = rootRef.current;
+    if (!root) return;
+
+    const ctx = gsap.context(() => {
+      gsap.fromTo(
+        ".hero-title-line",
+        { opacity: 0, y: "100%" },
+        { opacity: 1, y: "0%", duration: 0.9, stagger: 0.08, ease: "power3.out" },
+      );
+      gsap.fromTo(
+        ".hero-actions",
+        { opacity: 0, y: 16 },
+        { opacity: 1, y: 0, duration: 0.6, delay: 0.5, ease: "power3.out" },
+      );
+    }, root);
+
+    return () => ctx.revert();
   }, []);
 
   return (
-    <section className="hero-section" id="inicio">
+    <section className="hero-section" id="inicio" ref={rootRef}>
+      <div className="hero-ghost" aria-hidden="true">
+        2026
+      </div>
+
       <div className="container hero-inner">
-        <motion.p
-          className="hero-kicker"
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-        >
-          Desenvolvedor Full Stack
-        </motion.p>
-
-        <motion.h1
-          className="hero-title"
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-        >
-          Eu sou o Eduardo. Construo sistemas pensados para{" "}
-          <span className="hero-word-wrap">
-            <AnimatePresence mode="wait">
-              <motion.span
-                key={indice}
-                className="hero-word"
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: 0.35 }}
-              >
-                {PALAVRAS[indice]}
-              </motion.span>
-            </AnimatePresence>
+        <h1 className="hero-title">
+          <span className="hero-title-line-wrap">
+            <span className="hero-title-line">Eu construo sistemas reais</span>
           </span>
-          .
-        </motion.h1>
+          <span className="hero-title-line-wrap">
+            <span className="hero-title-line">
+              do zero à <span className="hero-title-accent">produção</span>
+            </span>
+          </span>
+        </h1>
 
-        <motion.p
-          className="hero-subtitle"
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-        >
-          Da ideia ao deploy: front-end, back-end e automação com IA, hoje rodando em produção
-          para clientes reais.
-        </motion.p>
-
-        <motion.div
-          className="hero-actions"
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-        >
-          <a href="#projetos" className="btn btn-primary">
-            Ver projetos
-          </a>
-          <a href="#contato" className="btn btn-ghost">
+        <div className="hero-actions">
+          <LinkCta href="#projetos">Ver projetos</LinkCta>
+          <a href="#contato" className="hero-link-secundario">
             Falar comigo
           </a>
-        </motion.div>
+        </div>
+      </div>
+
+      <div className="container">
+        <HeroVideo videoSrc="/videos/hero-demo.mp4" />
       </div>
     </section>
   );

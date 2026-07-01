@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 import type { ReactNode } from "react";
 import {
   FaReact,
@@ -19,6 +18,8 @@ import {
   SiVite,
   SiN8N,
 } from "react-icons/si";
+import { useReveal, useStaggerReveal } from "../lib/useReveal";
+import { MockTerminal } from "./MockTerminal";
 import "./Habilidades.css";
 
 interface Skill {
@@ -65,33 +66,20 @@ const GRUPOS: Grupo[] = [
 ];
 
 export function Habilidades() {
-  return (
-    <section className="section" id="habilidades">
-      <div className="container">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.5 }}
-        >
-          <p className="eyebrow">Habilidades</p>
-          <h2 className="section-title">Stack que uso no dia a dia</h2>
-          <p className="section-subtitle">
-            Sem stack fixa — escolho a ferramenta certa pra cada problema, mas estas são as que mais
-            aparecem nos meus projetos em produção.
-          </p>
-        </motion.div>
+  const introRef = useReveal<HTMLDivElement>();
+  const gruposRef = useStaggerReveal<HTMLDivElement>(".habilidade-grupo", { stagger: 0.12 });
 
-        <div className="habilidades-grupos">
-          {GRUPOS.map((grupo, grupoIndex) => (
-            <motion.div
-              key={grupo.titulo}
-              className="habilidade-grupo"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 0.4, delay: grupoIndex * 0.08 }}
-            >
+  return (
+    <section className="section section--escura curtain" id="habilidades">
+      <div className="container">
+        <div className="habilidades-intro" ref={introRef}>
+          <p className="eyebrow eyebrow--claro">Habilidades</p>
+          <h2 className="section-title section-title--claro">Stack que uso no dia a dia</h2>
+        </div>
+
+        <div className="habilidades-grupos" ref={gruposRef}>
+          {GRUPOS.map((grupo) => (
+            <div key={grupo.titulo} className="habilidade-grupo">
               <h3 className="grupo-titulo">{grupo.titulo}</h3>
               <div className="grupo-badges">
                 {grupo.skills.map((skill) => (
@@ -101,9 +89,11 @@ export function Habilidades() {
                   </span>
                 ))}
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
+
+        <MockTerminal />
       </div>
     </section>
   );
