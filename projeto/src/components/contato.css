@@ -6,8 +6,9 @@
 }
 
 .contato-titulo {
-  font-size: clamp(36px, 6vw, 64px);
-  font-weight: 700;
+  font-family: "Switzer", var(--font-sans);
+  font-size: clamp(46px, 7.5vw, 84px);
+  font-weight: 500;
   line-height: 1.1;
   color: #ffffff;
   margin-bottom: 40px;

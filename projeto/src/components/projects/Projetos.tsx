@@ -2,24 +2,14 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import mae from "../../img/mae.jpeg";
+import gestaoPlantio from "../../img/gestao-plantio.png";
+import financeiro from "../../img/financeiro.png";
 import { useReveal, useStaggerReveal } from "../../lib/useReveal";
+import { ProjetoCard } from "./ProjetoCard";
+import type { Projeto } from "./types";
 import "./Projetos.css";
 
 gsap.registerPlugin(ScrollTrigger);
-
-interface Projeto {
-  id: number;
-  titulo: string;
-  descricao: string;
-  tags: string[];
-  imagem?: string;
-  // Nenhum projeto tem vídeo ainda — quando gravar uma demo, preencher aqui
-  // que o card troca a imagem por <video loop muted> automaticamente.
-  video?: string;
-  destaque?: string;
-  linkGithub?: string;
-  linkDeploy?: string;
-}
 
 const PROJETOS: Projeto[] = [
   {
@@ -29,6 +19,7 @@ const PROJETOS: Projeto[] = [
       "Sistema de gestão agrícola por talhão para uma empresa do agronegócio: mapa satélite com desenho de polígonos, controle de safras simultâneas, estoque e relatórios em PDF/CSV. Sincroniza entre dispositivos via Supabase e também roda como app desktop.",
     tags: ["React", "TypeScript", "Supabase", "Tauri", "Leaflet"],
     destaque: "Em produção",
+    imagem: gestaoPlantio,
     linkGithub: "https://github.com/dudukings1/gestao-plantio",
     linkDeploy: "https://gestao-plantio.vercel.app",
   },
@@ -39,6 +30,7 @@ const PROJETOS: Projeto[] = [
       "App full-stack de finanças pessoais: dashboard de financiamentos, contas parceladas e métricas, com login social via OAuth (Google/GitHub) e backend próprio em Spring Boot + Supabase.",
     tags: ["React", "TypeScript", "Spring Boot", "Supabase"],
     destaque: "Em produção",
+    imagem: financeiro,
     linkDeploy: "https://financeiro-web-snowy.vercel.app",
   },
   {
@@ -103,51 +95,7 @@ export function Projetos() {
           }}
         >
           {PROJETOS.map((projeto, index) => (
-            <article
-              key={projeto.id}
-              className={`projeto-card ${index % 2 === 1 ? "projeto-card--invertido" : ""}`}
-            >
-              <div className="projeto-visual">
-                <div className="projeto-visual-inner">
-                  {projeto.video ? (
-                    <video src={projeto.video} autoPlay loop muted playsInline className="projeto-imagem" />
-                  ) : projeto.imagem ? (
-                    <img src={projeto.imagem} alt={projeto.titulo} className="projeto-imagem" />
-                  ) : (
-                    <div className="projeto-placeholder" />
-                  )}
-                </div>
-                {projeto.destaque && <span className="projeto-selo">{projeto.destaque}</span>}
-                <span className="projeto-explorar">Ver projeto</span>
-              </div>
-
-              <div className="projeto-info">
-                <span className="projeto-numero">{String(index + 1).padStart(2, "0")}</span>
-                <h3>{projeto.titulo}</h3>
-                <p>{projeto.descricao}</p>
-
-                <div className="projeto-tags">
-                  {projeto.tags.map((tag) => (
-                    <span key={tag} className="tag-item">
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-
-                <div className="projeto-links">
-                  {projeto.linkGithub && (
-                    <a href={projeto.linkGithub} target="_blank" rel="noreferrer" className="link-projeto">
-                      Código
-                    </a>
-                  )}
-                  {projeto.linkDeploy && (
-                    <a href={projeto.linkDeploy} target="_blank" rel="noreferrer" className="link-projeto link-projeto--principal">
-                      Ver demo
-                    </a>
-                  )}
-                </div>
-              </div>
-            </article>
+            <ProjetoCard key={projeto.id} projeto={projeto} index={index} />
           ))}
         </div>
       </div>

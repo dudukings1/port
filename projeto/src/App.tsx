@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import "mouse-follower/dist/mouse-follower.min.css";
+import "./fonts.css";
 import "./app.css";
 import "./cursor.css";
 import { initSmoothScroll, destroySmoothScroll } from "./lib/smoothScroll";

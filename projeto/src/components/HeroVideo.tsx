@@ -11,7 +11,15 @@ export function HeroVideo({ videoSrc }: HeroVideoProps) {
   return (
     <div className="hero-video">
       {videoSrc ? (
-        <video src={videoSrc} autoPlay loop muted playsInline className="hero-video-media" />
+        <video
+          src={videoSrc}
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="metadata"
+          className="hero-video-media"
+        />
       ) : (
         <>
           <div className="hero-video-dots" aria-hidden="true">

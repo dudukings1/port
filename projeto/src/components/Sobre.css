@@ -26,30 +26,62 @@
 .sobre-conteudo {
   position: relative;
   z-index: 1;
-  max-width: 620px;
+  max-width: 1060px;
+  margin-top: 5%;
   text-align: center;
 }
 
-.sobre-frase {
-  font-size: clamp(22px, 3vw, 30px);
-  line-height: 1.4;
-  color: var(--color-ink);
-  margin-bottom: 28px;
-}
-
-.sobre-destaque {
-  color: var(--color-accent);
-}
-
 .sobre-texto {
-  font-size: 16px;
-  color: var(--color-text-muted);
-  line-height: 1.75;
-  margin-bottom: 32px;
+  font-family: "Switzer", var(--font-sans);
+  font-size: clamp(39px, 5.7vw, 60px);
+  font-weight: 500;
+  color: var(--color-ink);
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+  margin-bottom: 36px;
 }
 
 .sobre-fatos {
   font-size: 14px;
   color: #6b6b6b;
   letter-spacing: 0.01em;
+  margin-bottom: 36px;
+}
+
+.sobre-cta {
+  position: relative;
+  isolation: isolate;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 26px 62px;
+  border-radius: 999px;
+  border: 1px solid var(--color-ink);
+  background: var(--color-ink);
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 20px;
+  font-weight: 700;
+  overflow: hidden;
+  transition: color 0.4s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.sobre-cta::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 0%;
+  background: #ffffff;
+  transition: height 0.4s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.sobre-cta:hover {
+  color: var(--color-ink);
+}
+
+.sobre-cta:hover::before {
+  height: 100%;
 }

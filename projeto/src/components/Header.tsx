@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { LinkCta } from "./LinkCta";
+import { useEffect, useState } from "react";
+import { startSmoothScroll, stopSmoothScroll } from "../lib/smoothScroll";
 import "./Header.css";
 
 const LINKS = [
@@ -13,6 +13,21 @@ const LINKS = [
 
 export function Header() {
   const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    if (open) {
+      stopSmoothScroll();
+      document.body.style.overflow = "hidden";
+    } else {
+      startSmoothScroll();
+      document.body.style.overflow = "";
+    }
+
+    return () => {
+      startSmoothScroll();
+      document.body.style.overflow = "";
+    };
+  }, [open]);
 
   return (
     <>
@@ -37,6 +52,7 @@ export function Header() {
       </button>
 
       <nav className={`nav-overlay ${open ? "is-open" : ""}`}>
+        <p className="eyebrow nav-overlay-eyebrow">Aonde quer ir?</p>
         {LINKS.map((link, index) => (
           <a
             key={link.href}
@@ -45,13 +61,10 @@ export function Header() {
             style={{ transitionDelay: open ? `${index * 0.05}s` : "0s" }}
             onClick={() => setOpen(false)}
           >
+            <span className="nav-overlay-link-prefix" aria-hidden="true">+</span>
             {link.label}
           </a>
         ))}
-
-        <LinkCta href="#contato" className="nav-overlay-cta" onClick={() => setOpen(false)}>
-          Vamos conversar
-        </LinkCta>
       </nav>
     </>
   );

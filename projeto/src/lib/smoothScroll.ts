@@ -44,6 +44,14 @@ export function initSmoothScroll() {
   return lenis;
 }
 
+export function stopSmoothScroll() {
+  lenis?.stop();
+}
+
+export function startSmoothScroll() {
+  lenis?.start();
+}
+
 export function destroySmoothScroll() {
   document.removeEventListener("click", handleAnchorClick);
   if (rafCallback) gsap.ticker.remove(rafCallback);
