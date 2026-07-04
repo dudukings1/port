@@ -37,6 +37,18 @@ const SERVICOS: Servico[] = [
 export function Servicos() {
   const introRef = useReveal<HTMLDivElement>();
   const listaRef = useStaggerReveal<HTMLDivElement>(".servico-item", { stagger: 0.1 });
+  const fantasmaRef = useStaggerReveal<HTMLDivElement>(".servico-fantasma", {
+    stagger: 0.2,
+    x: 60,
+    scale: 1.15,
+    duration: 0.8,
+  });
+  const setaRef = useStaggerReveal<HTMLDivElement>(".servico-seta", {
+    stagger: 0.1,
+    delay: 0.25,
+    x: 8,
+    duration: 0.4,
+  });
 
   return (
     <section className="section servicos-secao curtain" id="servicos">
@@ -46,7 +58,14 @@ export function Servicos() {
           <h2 className="section-title">O que eu posso construir pra você</h2>
         </div>
 
-        <div className="servicos-lista" ref={listaRef}>
+        <div
+          className="servicos-lista"
+          ref={(node) => {
+            listaRef.current = node;
+            fantasmaRef.current = node;
+            setaRef.current = node;
+          }}
+        >
           {SERVICOS.map((servico) => (
             <div key={servico.numero} className="servico-item">
               <span className="servico-fantasma" aria-hidden="true">

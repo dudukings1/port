@@ -25,7 +25,7 @@ const PROJETOS: Projeto[] = [
   },
   {
     id: 2,
-    titulo: "Financeiro",
+    titulo: "Fintrack",
     descricao:
       "App full-stack de finanças pessoais: dashboard de financiamentos, contas parceladas e métricas, com login social via OAuth (Google/GitHub) e backend próprio em Spring Boot + Supabase.",
     tags: ["React", "TypeScript", "Spring Boot", "Supabase"],

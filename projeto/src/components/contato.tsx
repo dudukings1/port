@@ -29,7 +29,12 @@ const WHATSAPP =
 
 export function Contato() {
   const introRef = useReveal<HTMLDivElement>();
-  const chipsRef = useStaggerReveal<HTMLDivElement>(".contato-chip", { stagger: 0.08, delay: 0.15 });
+  const chipsRef = useStaggerReveal<HTMLDivElement>(".contato-chip", {
+    stagger: 0.08,
+    delay: 0.15,
+    rotate: 6,
+    y: 16,
+  });
 
   return (
     <section className="section section--escura " id="contato">

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import gsap from "gsap";
 import { startSmoothScroll, stopSmoothScroll } from "../lib/smoothScroll";
 import "./Header.css";
 
@@ -13,6 +14,28 @@ const LINKS = [
 
 export function Header() {
   const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.fromTo(
+        ".brand",
+        { opacity: 0 },
+        { opacity: 1, duration: 0.7, ease: "power2.out" },
+      );
+      gsap.fromTo(
+        ".brand-nome",
+        { letterSpacing: "0.15em" },
+        { letterSpacing: "-0.01em", duration: 0.7, ease: "power2.out" },
+      );
+      gsap.fromTo(
+        ".nav-toggle",
+        { opacity: 0, scale: 0.6 },
+        { opacity: 1, scale: 1, duration: 0.5, delay: 0.35, ease: "back.out(2)" },
+      );
+    });
+
+    return () => ctx.revert();
+  }, []);
 
   useEffect(() => {
     if (open) {

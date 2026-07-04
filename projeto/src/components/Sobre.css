@@ -41,6 +41,11 @@
   margin-bottom: 36px;
 }
 
+.sobre-palavra {
+  display: inline-block;
+  will-change: transform;
+}
+
 .sobre-fatos {
   font-size: 14px;
   color: #6b6b6b;

@@ -68,6 +68,14 @@ const GRUPOS: Grupo[] = [
 export function Habilidades() {
   const introRef = useReveal<HTMLDivElement>();
   const gruposRef = useStaggerReveal<HTMLDivElement>(".habilidade-grupo", { stagger: 0.12 });
+  const badgesRef = useStaggerReveal<HTMLDivElement>(".skill-badge", {
+    stagger: 0.03,
+    scale: 0.8,
+    y: 0,
+    delay: 0.3,
+    duration: 0.4,
+  });
+  const terminalRef = useReveal<HTMLDivElement>({ scale: 0.96, y: 16, duration: 0.6 });
 
   return (
     <section className="section section--escura curtain" id="habilidades">
@@ -77,7 +85,13 @@ export function Habilidades() {
           <h2 className="section-title section-title--claro">Stack que uso no dia a dia</h2>
         </div>
 
-        <div className="habilidades-grupos" ref={gruposRef}>
+        <div
+          className="habilidades-grupos"
+          ref={(node) => {
+            gruposRef.current = node;
+            badgesRef.current = node;
+          }}
+        >
           {GRUPOS.map((grupo) => (
             <div key={grupo.titulo} className="habilidade-grupo">
               <h3 className="grupo-titulo">{grupo.titulo}</h3>
@@ -93,7 +107,9 @@ export function Habilidades() {
           ))}
         </div>
 
-        <MockTerminal />
+        <div ref={terminalRef}>
+          <MockTerminal atrasoInicialMs={700} />
+        </div>
       </div>
     </section>
   );

@@ -5,12 +5,15 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 interface RevealOptions {
+  x?: number;
   y?: number;
+  scale?: number;
+  rotate?: number;
   delay?: number;
   duration?: number;
 }
 
-/** Fade + slide-up de um elemento ao entrar na viewport. */
+/** Fade + slide (opcionalmente x/scale/rotate) de um elemento ao entrar na viewport. */
 export function useReveal<T extends HTMLElement>(options: RevealOptions = {}) {
   const ref = useRef<T | null>(null);
 
@@ -21,10 +24,19 @@ export function useReveal<T extends HTMLElement>(options: RevealOptions = {}) {
     const ctx = gsap.context(() => {
       gsap.fromTo(
         el,
-        { opacity: 0, y: options.y ?? 32 },
+        {
+          opacity: 0,
+          x: options.x ?? 0,
+          y: options.y ?? 32,
+          scale: options.scale ?? 1,
+          rotate: options.rotate ?? 0,
+        },
         {
           opacity: 1,
+          x: 0,
           y: 0,
+          scale: 1,
+          rotate: 0,
           duration: options.duration ?? 0.9,
           delay: options.delay ?? 0,
           ease: "power3.out",
@@ -48,7 +60,7 @@ interface StaggerOptions extends RevealOptions {
   stagger?: number;
 }
 
-/** Fade + slide-up em stagger para os filhos de um container ao entrar na viewport. */
+/** Fade + slide (opcionalmente x/scale/rotate) em stagger para os filhos de um container ao entrar na viewport. */
 export function useStaggerReveal<T extends HTMLElement>(
   childSelector: string,
   options: StaggerOptions = {},
@@ -65,11 +77,21 @@ export function useStaggerReveal<T extends HTMLElement>(
     const ctx = gsap.context(() => {
       gsap.fromTo(
         targets,
-        { opacity: 0, y: options.y ?? 28 },
+        {
+          opacity: 0,
+          x: options.x ?? 0,
+          y: options.y ?? 28,
+          scale: options.scale ?? 1,
+          rotate: options.rotate ?? 0,
+        },
         {
           opacity: 1,
+          x: 0,
           y: 0,
+          scale: 1,
+          rotate: 0,
           duration: options.duration ?? 0.7,
+          delay: options.delay ?? 0,
           stagger: options.stagger ?? 0.1,
           ease: "power3.out",
           scrollTrigger: {

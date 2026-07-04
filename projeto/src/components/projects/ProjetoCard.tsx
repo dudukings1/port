@@ -2,6 +2,7 @@ import { useRef, type MouseEvent, type ReactNode } from "react";
 import gsap from "gsap";
 import { FaReact, FaPython, FaCss3Alt } from "react-icons/fa";
 import { SiTypescript, SiSupabase, SiTauri, SiLeaflet, SiSpringboot, SiN8N, SiAnthropic } from "react-icons/si";
+import { useReveal, useStaggerReveal } from "../../lib/useReveal";
 import type { Projeto } from "./types";
 
 const ICONE_STACK: Record<string, ReactNode> = {
@@ -27,6 +28,14 @@ export function ProjetoCard({ projeto, index }: ProjetoCardProps) {
   const pillRef = useRef<HTMLSpanElement | null>(null);
   const quickX = useRef<ReturnType<typeof gsap.quickTo> | null>(null);
   const quickY = useRef<ReturnType<typeof gsap.quickTo> | null>(null);
+  const visualInnerRef = useReveal<HTMLDivElement>({ scale: 1.08, y: 0, duration: 0.9 });
+  const stackRef = useStaggerReveal<HTMLDivElement>(".projeto-stack-icone", {
+    stagger: 0.06,
+    scale: 0.6,
+    y: 0,
+    delay: 0.3,
+    duration: 0.35,
+  });
 
   function ensureQuick() {
     if (!pillRef.current || quickX.current) return;
@@ -54,7 +63,7 @@ export function ProjetoCard({ projeto, index }: ProjetoCardProps) {
 
   const visualInner = (
     <div className="projeto-visual-frame">
-      <div className="projeto-visual-inner">
+      <div className="projeto-visual-inner" ref={visualInnerRef}>
         {projeto.video ? (
           <video src={projeto.video} autoPlay loop muted playsInline className="projeto-imagem" />
         ) : projeto.imagem ? (
@@ -96,9 +105,8 @@ export function ProjetoCard({ projeto, index }: ProjetoCardProps) {
 
       <div className="projeto-info">
         <h3>{projeto.titulo}</h3>
-        <p>{projeto.descricao}</p>
 
-        <div className="projeto-stack">
+        <div className="projeto-stack" ref={stackRef}>
           {projeto.tags.map((tag) =>
             ICONE_STACK[tag] ? (
               <span key={tag} className="projeto-stack-icone" title={tag} role="img" aria-label={tag}>

@@ -13,14 +13,24 @@ export function Hero() {
 
     const ctx = gsap.context(() => {
       gsap.fromTo(
+        ".hero-ghost",
+        { opacity: 0, scale: 1.08 },
+        { opacity: 1, scale: 1, duration: 1.1, ease: "power2.out" },
+      );
+      gsap.fromTo(
         ".hero-title-line",
         { opacity: 0, y: "100%" },
-        { opacity: 1, y: "0%", duration: 0.9, stagger: 0.08, ease: "power3.out" },
+        { opacity: 1, y: "0%", duration: 0.9, delay: 0.15, stagger: 0.08, ease: "power3.out" },
       );
       gsap.fromTo(
         ".hero-actions",
         { opacity: 0, y: 16 },
         { opacity: 1, y: 0, duration: 0.6, delay: 0.5, ease: "power3.out" },
+      );
+      gsap.fromTo(
+        ".hero-video",
+        { clipPath: "circle(0% at 50% 50%)" },
+        { clipPath: "circle(150% at 50% 50%)", duration: 1, delay: 0.6, ease: "power2.inOut" },
       );
     }, root);
 

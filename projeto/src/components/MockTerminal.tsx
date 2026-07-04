@@ -12,12 +12,25 @@ const VELOCIDADE_DIGITACAO = 35;
 const PAUSA_ENTRE_LINHAS = 900;
 const PAUSA_NO_FINAL = 2200;
 
-export function MockTerminal() {
+interface MockTerminalProps {
+  atrasoInicialMs?: number;
+}
+
+export function MockTerminal({ atrasoInicialMs = 0 }: MockTerminalProps) {
+  const [pronto, setPronto] = useState(atrasoInicialMs === 0);
   const [linhaAtual, setLinhaAtual] = useState(0);
   const [textoDigitado, setTextoDigitado] = useState("");
   const [linhasProntas, setLinhasProntas] = useState<string[]>([]);
 
   useEffect(() => {
+    if (pronto || atrasoInicialMs === 0) return;
+    const timeout = setTimeout(() => setPronto(true), atrasoInicialMs);
+    return () => clearTimeout(timeout);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    if (!pronto) return;
     const linha = LINHAS[linhaAtual];
     if (textoDigitado.length < linha.texto.length) {
       const timeout = setTimeout(() => {
@@ -41,7 +54,7 @@ export function MockTerminal() {
       ehUltimaLinha ? PAUSA_NO_FINAL : PAUSA_ENTRE_LINHAS,
     );
     return () => clearTimeout(timeout);
-  }, [textoDigitado, linhaAtual]);
+  }, [textoDigitado, linhaAtual, pronto]);
 
   return (
     <div className="mock-terminal">
