@@ -15,6 +15,10 @@ Stack: React 19 + TypeScript + Vite, ESLint.
 
 ## Comandos
 
+Cada worktree (`-claude`, `-codex`) tem suas próprias dependências — rode
+`npm install` de novo em cada uma, `node_modules` não é compartilhado entre
+worktrees.
+
 ```powershell
 cd projeto
 npm install
@@ -38,6 +42,10 @@ Regras:
 - Commits pequenos, prefixo convencional (`feat:`, `fix:`, `refactor:`,
   `chore:`), em inglês.
 - Nunca `push --force`, `merge` ou `rebase` direto na `main`.
+- Antes de começar uma tarefa nova, dê rebase (ou merge) da `main` atualizada
+  na sua branch.
+- Nunca commite um arquivo `.env` real nem cole valor de segredo/credencial
+  em commit, log ou código — use sempre `.env.example` como referência.
 - Fidelidade visual importa muito aqui: cor, layout, raio de borda e
   animação são um pacote só — não aproxime "parecido o suficiente" sem
   confirmar com o Eduardo.
