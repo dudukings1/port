@@ -56,3 +56,30 @@ Claude retomando, seja Codex assumindo) precise adivinhar o estado.
 ## Ver também
 
 - `AGENTS.md` — convenções de código, comandos, estrutura de worktrees.
+
+## Ordem de trabalho do Claude (pipeline de agentes)
+
+Pra qualquer tarefa não trivial, eu sigo essa ordem, acionando os agentes
+especializados disponíveis no meu ambiente quando fizer sentido:
+
+1. **Descoberta** — se o pedido ainda está vago (objetivo, regra de negócio
+   ou critério de pronto não claros), acionar `descoberta-requisitos` antes
+   de qualquer decisão técnica.
+2. **Arquitetura** — desenhar estrutura, módulos e responsabilidades antes
+   de codar. Uso o agente `arquiteto-projetos` quando o projeto/feature é
+   novo o suficiente pra merecer isso; pra mudanças pequenas, decido eu
+   mesmo e registro a decisão (ver seção de Handoff).
+3. **Implementação** — eu implemento, ou delego a um especialista quando
+   existir um pra o tipo de tarefa (ex: `especialista-n8n` pra automação,
+   `designer-landing-page` pra landing page).
+4. **Revisão** — antes de considerar pronto, passo por revisão de código
+   (`/code-review`) ou pelo agente `revisor-entrega` quando for checklist de
+   entrega, não só de código.
+5. **Debug** — se aparecer um bug, primeiro `investigador-bugs` pra achar a
+   causa raiz; só depois aplico o fix. Nunca corrijo sintoma sem entender a
+   causa.
+
+**Codex não tem acesso a esses subagentes** — ao assumir uma tarefa (seja em
+paralelo, seja como fallback), ele segue o plano já registrado pelas etapas
+1–2 e foca na etapa 3 (implementação). A etapa 4 (revisão final) continua
+sendo feita por mim ou pelo Eduardo antes do merge pra `main`.
