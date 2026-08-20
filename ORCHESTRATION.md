@@ -14,6 +14,7 @@ numa nota solta, porque a outra IA pode nunca ver isso.
 
 ```
 - Tarefa: (nenhuma tarefa em andamento agora)
+- Issue Linear: —
 - Responsável atual: —
 - Status: —
 - Última atualização: —
@@ -34,9 +35,12 @@ Este repo tem um Project dedicado no Linear: **Portfólio Eduardo**
 (https://linear.app/eduardodrprojetos/project/portfolio-eduardo-8679822637fb), time `Projetos`.
 
 - **Cadastrar**: ao preencher "Plano ativo" acima com uma tarefa não trivial, crie
-  também uma issue nesse Project com o mesmo título/resumo. Atualize o estado da
-  issue só em transições reais (Todo → In Progress → Done/Canceled) — igual à
-  disciplina do `module-orchestrator`, nunca a cada retry ou commit intermediário.
+  também uma issue nesse Project com o mesmo título/resumo, e cole o ID dela no
+  campo `- Issue Linear:` do bloco acima. **Isso é obrigatório, não opcional**: um
+  hook `pre-commit` (`scripts/git-hooks/`) bloqueia qualquer commit se "Tarefa"
+  estiver preenchida e "Issue Linear" estiver vazia. Atualize o estado da issue só
+  em transições reais (Todo → In Progress → Done/Canceled) — igual à disciplina do
+  `module-orchestrator`, nunca a cada retry ou commit intermediário.
 - **Listar**: pra ver o histórico/estado de tarefas deste repo, consulte as issues
   desse Project no Linear em vez de vasculhar commits ou notas soltas. É a fonte de
   verdade estruturada — complementar ao "Plano ativo" (só a tarefa em andamento
@@ -88,6 +92,13 @@ Se `claude-work` e `codex-work` mudarem o mesmo arquivo antes do merge: quem
 perceber primeiro avisa o Eduardo. Ele decide qual versão vira a base
 mesclada na `main`; o outro agente reaplica o que fez em cima dessa base
 (rebase da própria branch) em vez de tentar resolver o conflito sozinho.
+
+**Isso não depende só de alguém perceber.** Um hook `pre-merge-commit`
+(`scripts/git-hooks/`) roda automaticamente em todo `git merge` pra `main` e
+lista qualquer arquivo tocado pelos dois lados desde a base comum — mesmo
+quando o git resolveria sozinho sem marcar conflito textual. Por padrão ele
+bloqueia o merge nesse caso; `ALLOW_OVERLAP=1 git merge <branch>` confirma
+mesmo assim, depois de revisar a lista.
 
 ## Depois do merge
 

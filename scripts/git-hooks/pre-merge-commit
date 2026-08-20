@@ -1,0 +1,36 @@
+#!/bin/bash
+# Avisa (e bloqueia por padrão) quando a branch sendo mesclada em 'main' tocou
+# os MESMOS arquivos que 'main' mudou desde a base comum. Não é conflito
+# textual (git já resolveria sozinho ou já pediu resolução antes deste hook
+# rodar) — é sobreposição silenciosa: os dois lados mexeram no mesmo arquivo
+# de jeitos que não geram marcador de conflito, mas podem interagir mal.
+
+current=$(git symbolic-ref --short HEAD 2>/dev/null)
+[ "$current" = "main" ] || exit 0
+
+git rev-parse -q --verify MERGE_HEAD >/dev/null 2>&1 || exit 0
+incoming=$(git rev-parse MERGE_HEAD)
+incoming_name=$(git name-rev --name-only "$incoming" 2>/dev/null || echo "$incoming")
+
+base=$(git merge-base HEAD "$incoming")
+
+mine=$(git diff --name-only "$base" HEAD)
+theirs=$(git diff --name-only "$base" "$incoming")
+
+overlap=$(comm -12 <(printf '%s\n' "$mine" | sort) <(printf '%s\n' "$theirs" | sort))
+
+if [ -n "$overlap" ]; then
+  echo "" >&2
+  echo "⚠️  pre-merge-commit: arquivos tocados nos DOIS lados desde a base comum" >&2
+  echo "    (main x $incoming_name):" >&2
+  echo "$overlap" | sed 's/^/    - /' >&2
+  echo "" >&2
+  echo "    Git não marcou conflito textual, mas os dois lados mexeram no mesmo" >&2
+  echo "    arquivo — revise manualmente antes de confiar no merge automático." >&2
+  if [ "$ALLOW_OVERLAP" != "1" ]; then
+    echo "    Pra confirmar mesmo assim: ALLOW_OVERLAP=1 git merge $incoming_name" >&2
+    echo "" >&2
+    exit 1
+  fi
+fi
+exit 0

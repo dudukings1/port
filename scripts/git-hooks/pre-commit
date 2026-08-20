@@ -1,0 +1,35 @@
+#!/bin/bash
+# Bloqueia commit se "Plano ativo" (ORCHESTRATION.md) tem tarefa ativa sem
+# issue do Linear referenciada. Ver seção "Tarefas no Linear" do próprio
+# ORCHESTRATION.md para o porquê.
+
+doc="ORCHESTRATION.md"
+[ -f "$doc" ] || exit 0
+
+block=$(awk '
+  /^```/ { c++; if (c==1) next; if (c==2) exit }
+  c==1 { print }
+' "$doc")
+
+tarefa=$(printf '%s\n' "$block" | grep -m1 '^- Tarefa:' | sed 's/^- Tarefa: *//')
+issue=$(printf '%s\n' "$block" | grep -m1 '^- Issue Linear:' | sed 's/^- Issue Linear: *//')
+
+is_empty() {
+  case "$1" in
+    ""|"—"|"(nenhuma tarefa em andamento agora)") return 0 ;;
+    *) return 1 ;;
+  esac
+}
+
+if ! is_empty "$tarefa" && is_empty "$issue"; then
+  echo "" >&2
+  echo "❌ pre-commit: '$doc' tem tarefa ativa em 'Plano ativo' sem issue do Linear." >&2
+  echo "   Tarefa: $tarefa" >&2
+  echo "   Preencha o campo '- Issue Linear:' (ex: PRO-42) antes de commitar." >&2
+  echo "   Crie a issue no Project deste repo primeiro (ver seção 'Tarefas no Linear')." >&2
+  echo "" >&2
+  echo "   Pra pular esta checagem uma vez: git commit --no-verify" >&2
+  echo "" >&2
+  exit 1
+fi
+exit 0
