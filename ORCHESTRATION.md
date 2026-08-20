@@ -28,6 +28,20 @@ seção estiver vazia ou claramente desatualizada demais pra dar segurança, o
 Codex pergunta ao Eduardo antes de inventar um plano novo — nunca assume
 silenciosamente que pode redesenhar a arquitetura sozinho.
 
+## Tarefas no Linear
+
+Este repo tem um Project dedicado no Linear: **Portfólio Eduardo**
+(https://linear.app/eduardodrprojetos/project/portfolio-eduardo-8679822637fb), time `Projetos`.
+
+- **Cadastrar**: ao preencher "Plano ativo" acima com uma tarefa não trivial, crie
+  também uma issue nesse Project com o mesmo título/resumo. Atualize o estado da
+  issue só em transições reais (Todo → In Progress → Done/Canceled) — igual à
+  disciplina do `module-orchestrator`, nunca a cada retry ou commit intermediário.
+- **Listar**: pra ver o histórico/estado de tarefas deste repo, consulte as issues
+  desse Project no Linear em vez de vasculhar commits ou notas soltas. É a fonte de
+  verdade estruturada — complementar ao "Plano ativo" (só a tarefa em andamento
+  agora) e ao vault Obsidian (decisão/contexto narrativo, não status de tarefa).
+
 ## Papéis
 
 **Claude (arquiteto/orquestrador)**
